@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<package>
+  <metadata>
+    <id>EtwEnumerator.Win32Metadata</id>
+    <version>0.0.14.0</version>
+    <authors>Microsoft (packaged by Sebastian Solnica)</authors>
+    <title>EtwEnumerator Library Win32 Metadata</title>
+    <summary>This packages provides the Win32 API surface of the EtwEnumerator library as a winmd (Windows metadata) file.</summary>
+    <description>This packages provides the Win32 API surface of the EtwEnumerator library as a winmd (Windows metadata) file. It is intended to be used as the basis for generating language-specific projections. It is not loadable as a CLR assembly.</description>
+    <projectUrl>https://github.com/lowleveldesign/EtwEnumerator-win32metadata</projectUrl>
+    <tags>Win32 Metadata ETW</tags>
+    <license type="expression">MIT</license>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <repository type="git" url="https://github.com/microsoft/ETW.git" />
+    <dependencies>
+      <dependency id="Microsoft.Windows.SDK.Win32Metadata" version="63.0.31-preview" />
+    </dependencies>
+  </metadata>
+
+  <files>
+    <file src="$OutputWinmd$" target=""/>
+
+    <file src="EtwEnumerator.Win32Metadata.props" target="build/EtwEnumerator.Win32Metadata.props" />
+    <file src="EtwEnumerator.Win32Metadata.props" target="buildTransitive/EtwEnumerator.Win32Metadata.props" />
+
+    <!-- Native binaries -->
+    <file src="../build/ninja-x64-release/EtwEnumerator/EtwEnumeratorStatic.lib" target="static/win-x64/native/EtwEnumeratorStatic.lib" />
+    <file src="../build/ninja-x64-release/EtwEnumerator/EtwEnumeratorStatic.pdb" target="static/win-x64/native/EtwEnumeratorStatic.pdb" />
+    <file src="../build/ninja-x64-release/EtwEnumerator/EtwEnumerator.dll" target="runtimes/win-x64/native/EtwEnumerator.dll" />
+    <file src="../build/ninja-x64-release/EtwEnumerator/EtwEnumerator.pdb" target="runtimes/win-x64/native/EtwEnumerator.pdb" />
+  </files>
+</package>

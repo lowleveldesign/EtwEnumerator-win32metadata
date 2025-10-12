@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.Windows.WinmdGenerator/0.63.31-preview">
+  <PropertyGroup>
+    <OutputWinmd>winmd/EtwEnumerator.winmd</OutputWinmd>
+    <WinmdVersion>0.0.1</WinmdVersion>
+    <GenerateAssemblyVersionInfo>false</GenerateAssemblyVersionInfo>
+    <NuspecFile>EtwEnumerator.Win32Metadata.nuspec</NuspecFile>
+    <NuspecProperties></NuspecProperties>
+    <NuspecBasePath>.</NuspecBasePath>
+    <NoWarn>$(NoWarn);NU5100;NU5104</NoWarn>
+
+    <ShowEmitWinmdOutputDetails>true</ShowEmitWinmdOutputDetails>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Headers Include="EtwEnumerator_Export.h" />
+
+    <ImportLibs Include="..\build\ninja-x64-release\EtwEnumerator\EtwEnumerator.lib" />
+
+    <Partition Include="main.cpp">
+      <TraverseFiles>@(Headers)</TraverseFiles>
+      <Namespace>Microsoft.EtwEnumerator</Namespace>
+      <ExcludeFromCrossarch>true</ExcludeFromCrossarch>
+    </Partition>
+  </ItemGroup>
+
+  <Target Name="SetNuSpecProperties" BeforeTargets="GenerateNuspec">
+    <PropertyGroup>
+      <NuspecProperties>$(NuspecProperties);OutputWinmd=$(OutputWinmd)</NuspecProperties>
+    </PropertyGroup>
+  </Target>
+</Project>

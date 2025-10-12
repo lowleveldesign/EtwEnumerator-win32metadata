@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <ItemGroup>
+    <ProjectionMetadataWinmd Include="$(MSBuildThisFileDirectory)..\EtwEnumerator.winmd" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(PublishAot)' == 'true'">
+    <DirectPInvoke Include="EtwEnumerator" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(PublishAot)' == 'true' And $([MSBuild]::IsOSPlatform('Windows')) And  '$(ProcessorArchitecture)' == 'amd64'">
+    <NativeLibrary Include="$(MSBuildThisFileDirectory)..\static\win-x64\native\EtwEnumeratorStatic.lib" />
+    <NativeLibrary Include="Tdh.lib" />
+  </ItemGroup>
+</Project>

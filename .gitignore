@@ -1,0 +1,4 @@
+build/
+EtwEnumerator/winmd
+bin/
+obj/

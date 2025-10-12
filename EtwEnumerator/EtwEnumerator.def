@@ -1,0 +1,4 @@
+LIBRARY EtwEnumerator
+EXPORTS
+	CreateEtwEnumerator
+	DeleteEtwEnumerator

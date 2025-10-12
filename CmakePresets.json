@@ -1,0 +1,54 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 22,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "ninja-x64-debug",
+      "displayName": "Ninja (x64) - Debug",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "architecture": {
+        "value": "x64",
+        "strategy": "external"
+      },
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": {
+          "value": "Debug"
+        }
+      }
+    },
+    {
+      "name": "ninja-x64-release",
+      "displayName": "Ninja (x64) - Release",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "architecture": {
+        "value": "x64",
+        "strategy": "external"
+      },
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": {
+          "value": "RelWithDebInfo"
+        }
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "ninja-x64-debug",
+      "configurePreset": "ninja-x64-debug",
+      "displayName": "Ninja (x64) - Debug",
+      "verbose": true
+    },
+    {
+      "name": "ninja-x64-release",
+      "configurePreset": "ninja-x64-release",
+      "displayName": "Ninja (x64) - Release",
+      "verbose": true
+    }
+  ]
+}
