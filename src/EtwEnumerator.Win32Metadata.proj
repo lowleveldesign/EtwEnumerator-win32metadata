@@ -15,7 +15,7 @@
   <ItemGroup>
     <Headers Include="EtwEnumerator_Export.h" />
 
-    <ImportLibs Include="..\build\ninja-x64-release\EtwEnumerator\EtwEnumerator.lib" />
+    <ImportLibs Include="../build/ninja-x64-release/src/EtwEnumerator.lib" />
 
     <Partition Include="main.cpp">
       <TraverseFiles>@(Headers)</TraverseFiles>

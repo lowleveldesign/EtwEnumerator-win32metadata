@@ -1,0 +1,74 @@
+name: build
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-etwenumerator:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: cmd
+
+    strategy:
+      matrix:
+        arch:
+          - vs_name: amd64
+            ninja_name: x64
+
+    steps:
+      - uses: actions/checkout@main
+        with:
+          fetch-depth: 1
+          submodules: true
+
+      - uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: ${{ matrix.arch.vs_name }}
+          sdk: 10.0.26100.0
+          vsversion: 2022
+
+      - name: Build the EtwEnumerator DLL (${{ matrix.arch.vs_name }})
+        working-directory: .
+        run: |
+          cmake --preset=ninja-${{ matrix.arch.ninja_name }}-release
+          cmake --build --preset=ninja-${{ matrix.arch.ninja_name }}-release
+
+      - uses: actions/upload-artifact@main
+        with:
+          name: build.${{ matrix.arch.ninja_name }}
+          path: build
+
+  
+  build-metadata:
+    needs: build-etwenumerator
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: cmd
+
+    steps:
+      - uses: actions/checkout@main
+        with:
+          fetch-depth: 1
+          submodules: true
+      
+      - uses: actions/download-artifact@main
+        with:
+          pattern: build.*
+          path: build
+
+      - uses: actions/setup-dotnet@main
+        with:
+          dotnet-version: 9.0.x
+
+      - name: Build detours metadata
+        working-directory: src
+        run: dotnet build -c Release -p:GeneratePackageOnBuild=true
+
+      - uses: actions/upload-artifact@main
+        with:
+          name: EtwEnumerator.winmd
+          path: src/winmd/EtwEnumerator.winmd

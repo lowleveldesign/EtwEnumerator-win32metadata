@@ -1,4 +1,4 @@
 build/
-EtwEnumerator/winmd
+src/winmd
 bin/
 obj/

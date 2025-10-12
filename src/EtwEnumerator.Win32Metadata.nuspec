@@ -24,9 +24,9 @@
     <file src="EtwEnumerator.Win32Metadata.props" target="buildTransitive/EtwEnumerator.Win32Metadata.props" />
 
     <!-- Native binaries -->
-    <file src="../build/ninja-x64-release/EtwEnumerator/EtwEnumeratorStatic.lib" target="static/win-x64/native/EtwEnumeratorStatic.lib" />
-    <file src="../build/ninja-x64-release/EtwEnumerator/EtwEnumeratorStatic.pdb" target="static/win-x64/native/EtwEnumeratorStatic.pdb" />
-    <file src="../build/ninja-x64-release/EtwEnumerator/EtwEnumerator.dll" target="runtimes/win-x64/native/EtwEnumerator.dll" />
-    <file src="../build/ninja-x64-release/EtwEnumerator/EtwEnumerator.pdb" target="runtimes/win-x64/native/EtwEnumerator.pdb" />
+    <file src="../build/ninja-x64-release/src/EtwEnumeratorStatic.lib" target="static/win-x64/native/EtwEnumeratorStatic.lib" />
+    <file src="../build/ninja-x64-release/src/EtwEnumeratorStatic.pdb" target="static/win-x64/native/EtwEnumeratorStatic.pdb" />
+    <file src="../build/ninja-x64-release/src/EtwEnumerator.dll" target="runtimes/win-x64/native/EtwEnumerator.dll" />
+    <file src="../build/ninja-x64-release/src/EtwEnumerator.pdb" target="runtimes/win-x64/native/EtwEnumerator.pdb" />
   </files>
 </package>

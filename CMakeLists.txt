@@ -10,6 +10,4 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -W4 -WX")
 
-add_subdirectory(EtwEnumerator)
-
-# add_subdirectory(setup)
+add_subdirectory(src)
