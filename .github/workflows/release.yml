@@ -1,9 +1,9 @@
-name: build
+name: release
 
-on:
+on: 
   push:
-    branches:
-      - main
+    tags:
+      - '*'
 
 jobs:
   build-etwenumerator:
@@ -40,8 +40,9 @@ jobs:
         with:
           name: build.${{ matrix.arch.ninja_name }}
           path: build
+
   
-  build-metadata:
+  build-and-publish-metadata:
     needs: build-etwenumerator
     runs-on: windows-latest
     defaults:
@@ -63,11 +64,27 @@ jobs:
         with:
           dotnet-version: 9.0.x
 
+      - run: |
+          Invoke-WebRequest -OutFile Update-AssemblyInfoVersionFiles.ps1 https://gist.githubusercontent.com/lowleveldesign/663de4e0d5a071f938e6f7c82d7ca9a0/raw/Update-AssemblyInfoVersionFiles.ps1
+          ./Update-AssemblyInfoVersionFiles.ps1
+        shell: pwsh
+
       - name: Build detours metadata
         working-directory: src
         run: dotnet build -c Release -p:GeneratePackageOnBuild=true
+
+      - run: dotnet nuget push -s https://api.nuget.org/v3/index.json -k "$env:NUGET_KEY" EtwEnumerator.Win32Metadata.*.nupkg
+        shell: pwsh
+        env:
+          NUGET_KEY: ${{ secrets.NUGET_KEY }}
+        working-directory: src/bin/Release
 
       - uses: actions/upload-artifact@main
         with:
           name: EtwEnumerator.winmd
           path: src/winmd/EtwEnumerator.winmd
+
+      - uses: actions/upload-artifact@main
+        with:
+          name: Nuget package
+          path: src/bin/Release/EtwEnumerator.Win32Metadata.*.nupkg
