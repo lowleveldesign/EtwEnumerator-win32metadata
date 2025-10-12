@@ -15,8 +15,8 @@ jobs:
     strategy:
       matrix:
         arch:
-          - vs_name: amd64
-            ninja_name: x64
+          - name: x64
+            vs_name: amd64
 
     steps:
       - uses: actions/checkout@main
@@ -30,15 +30,15 @@ jobs:
           sdk: 10.0.26100.0
           vsversion: 2022
 
-      - name: Build the EtwEnumerator DLL (${{ matrix.arch.vs_name }})
+      - name: Build the EtwEnumerator DLL (${{ matrix.arch.name }})
         working-directory: .
         run: |
-          cmake --preset=ninja-${{ matrix.arch.ninja_name }}-release
-          cmake --build --preset=ninja-${{ matrix.arch.ninja_name }}-release
+          cmake --preset=ninja-${{ matrix.arch.name }}-release
+          cmake --build --preset=ninja-${{ matrix.arch.name }}-release
 
       - uses: actions/upload-artifact@main
         with:
-          name: build.${{ matrix.arch.ninja_name }}
+          name: build.${{ matrix.arch.name }}
           path: build
   
   build-metadata:

@@ -33,5 +33,3 @@ EnableTraceEx2
 Please also check the [cswin32 project README file](https://github.com/microsoft/CsWin32/blob/main/README.md) for other configuration options of the PInvoke generators.
 
 3. You are ready to use the native functions in your code :)
-
-My other project, [wtrace](https://github.com/lowleveldesign/wtrace), uses this package to parse ETW events.

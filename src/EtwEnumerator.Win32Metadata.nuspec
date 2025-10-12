@@ -2,7 +2,8 @@
 <package>
   <metadata>
     <id>EtwEnumerator.Win32Metadata</id>
-    <version>0.1.0.0</version>
+    <!-- version will be updated according to the tag value during the release -->
+    <version>0.0.0.1</version>
     <authors>Microsoft (packaged by Sebastian Solnica)</authors>
     <title>EtwEnumerator Library Win32 Metadata</title>
     <summary>This packages provides the Win32 API surface of the EtwEnumerator library as a winmd (Windows metadata) file.</summary>

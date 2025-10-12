@@ -15,8 +15,9 @@ jobs:
     strategy:
       matrix:
         arch:
-          - vs_name: amd64
-            ninja_name: x64
+          - name: x64
+            vs_name: amd64
+            
 
     steps:
       - uses: actions/checkout@main
@@ -33,12 +34,12 @@ jobs:
       - name: Build the EtwEnumerator DLL (${{ matrix.arch.vs_name }})
         working-directory: .
         run: |
-          cmake --preset=ninja-${{ matrix.arch.ninja_name }}-release
-          cmake --build --preset=ninja-${{ matrix.arch.ninja_name }}-release
+          cmake --preset=ninja-${{ matrix.arch.name }}-release
+          cmake --build --preset=ninja-${{ matrix.arch.name }}-release
 
       - uses: actions/upload-artifact@main
         with:
-          name: build.${{ matrix.arch.ninja_name }}
+          name: build.${{ matrix.arch.name }}
           path: build
 
   
@@ -69,7 +70,7 @@ jobs:
           ./Update-AssemblyInfoVersionFiles.ps1
         shell: pwsh
 
-      - name: Build detours metadata
+      - name: Build metadata
         working-directory: src
         run: dotnet build -c Release -p:GeneratePackageOnBuild=true
 
